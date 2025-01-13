@@ -9,3 +9,41 @@ As deliverables, the findings can be used for:
   1) identifying the PM2.5 monitoring gap;
   2) linking the lack of PM2.5 monitoring resources with social deprivations in environmental justice
 
+Refer to below the package versions:
+>>
+> packageVersion("dplyr") <br>
+[1] ‘1.1.4’ <br>
+> packageVersion("stringr") <br>
+[1] ‘1.5.1’ <br>
+> packageVersion("reshape2") <br>
+[1] ‘1.4.4’ <br>
+> packageVersion("openxlsx") <br>
+[1] ‘4.2.7.1’ <br>
+> packageVersion("data.table") <br>
+[1] ‘1.16.4’ <br>
+> packageVersion("lubridate") <br>
+[1] ‘1.9.4’ <br>
+> packageVersion("ggplot2") <br>
+[1] ‘3.5.1’ <br>
+> packageVersion("sp") <br>
+[1] ‘2.1.4’ <br>
+> packageVersion("sf") <br>
+[1] ‘1.0.19’ <br>
+> packageVersion("tmap") <br>
+[1] ‘3.3.4’ <br>
+> packageVersion("ncdf4") <br>
+[1] ‘1.23’ <br>
+> packageVersion("raster") <br>
+[1] ‘3.6.30’ <br>
+> packageVersion("spatstat") <br>
+[1] ‘3.3.0’ <br>
+> packageVersion("basemaps") <br>
+[1] ‘0.0.8’ <br>
+> packageVersion("terra") <br>
+[1] ‘1.7.83’ <br>
+> packageVersion("tidyterra") <br>
+[1] ‘0.6.1’ <br>
+> packageVersion("exactextractr") <br>
+[1] ‘0.10.0’ <br>
+> packageVersion("lme4") <br>
+[1] ‘1.1.35.5’ <br>
