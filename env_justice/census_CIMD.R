@@ -1,8 +1,9 @@
 require(openxlsx)
 
 
-###  CIMD data downloadable from:  https://www150.statcan.gc.ca/n1/pub/45-20-0001/452000012023001-eng.htm
-
+"""  
+CIMD data downloadable from:  https://www150.statcan.gc.ca/n1/pub/45-20-0001/452000012023001-eng.htm
+"""
 
 can_cimd = read.xlsx("./data/can_scores_quintiles_EN.xlsx")
 colnames(can_cimd)[1:3] = c("DAUID","Province","DA_pop_density")
