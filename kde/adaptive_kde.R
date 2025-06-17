@@ -1,6 +1,11 @@
 require(spatstat)
 
 
+""" objects inherited from preprocess scripts """
+# source("./preprocess/getPoints.R")
+
+
+
 ####  Create an output grid object  ####
 
 minx = -95.0
