@@ -5,6 +5,11 @@ require(data.table)
 require(lubridate)
 
 
+""" objects inherited from data access scripts """
+# source("./access/fem_access.R")
+# source("./access/purpleair_access.R")
+
+
 """
 Time weights for the Adaptive KDE
 """
