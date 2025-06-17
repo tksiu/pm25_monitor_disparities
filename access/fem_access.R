@@ -36,6 +36,9 @@ naps = naps %>% group_by(NAPS.ID, City, Province, Latitude, Longitude) %>% summa
 naps$siteID = sapply(naps$NAPS.ID, function(x) sprintf("%09d", x))
 
 
+####   Check PurpleAir sensor colocation with FEM stations
+####   PurpleAir sensor data access referred to:  ./access/purpleair_access.R  in this repository
+
 pa_coord = pa[, c("site_id","lat","lng","prov_terr","nearest_fem","fem_dist_km","date_created","last_seen")]
 pa_coord$colocation = ifelse(pa_coord$fem_dist_km < 1, 1, 0)
 pa_coord$create_year = year(pa_coord$date_created)
