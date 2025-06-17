@@ -4,6 +4,12 @@ require(sf)
 require(spatstat)
 
 
+""" objects inherited from preprocess scripts """
+# source("./preprocess/getPoints.R")
+# source("./preprocess/rasterize_surfacePM25.R")
+
+
+
 #   set the maximum threshold allowed
 pdist = pairdist(
     superimpose(pa_points, fem_points)
