@@ -1,6 +1,20 @@
 require(spatstat)
 
 
+####  Create an output grid object  ####
+
+minx = -95.0
+maxx = -52.0
+miny = 41.5
+maxy = 63.0
+
+interp_x = seq(from=minx, to=maxx, by=0.01)
+interp_y = seq(from=miny, to=maxy, by=0.01)
+interp_grid = expand.grid(interp_x, interp_y)
+colnames(interp_grid) = c("x","y")
+
+
+
 if (sys.nframe() == 0) {
 
     #  PurpleAir sensors: computed/supervised bandwidth selection
