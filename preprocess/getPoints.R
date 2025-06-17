@@ -3,6 +3,11 @@ require(sf)
 require(spatstat)
 
 
+""" implementation of data access scripts """
+# source("./access/purpleair_access.R")
+# source("./access/fem_access.R")
+
+
 minx = -95.0
 maxx = -52.0
 miny = 41.5
