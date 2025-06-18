@@ -1,8 +1,9 @@
 require(spatstat)
 
 
-""" objects inherited from preprocess scripts """
-# source("./preprocess/getPoints.R")
+""" precomputed weightings and bandwidths """
+# source("./kde/weights.R")
+# source("./kde/bandwidths.R")
 
 
 
