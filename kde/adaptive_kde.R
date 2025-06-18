@@ -1,9 +1,8 @@
 require(spatstat)
 
 
-""" precomputed weightings and bandwidths """
+""" precomputed weightings and bandwidths (incorporated in /kde/weights to avoid conflicts in workflow) """
 # source("./kde/weights.R")
-# source("./kde/bandwidths.R")
 
 
 
