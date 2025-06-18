@@ -1,6 +1,11 @@
 require(lme4)
 
 
+"""  objects inherited from previous scripts """
+# source("/env_justice/census_zonal_stats.R")
+
+
+
 da$total_sp_tw_kde.Quintiles_binary = ifelse(da$total_sp_tw_kde.Quintiles == 1, 1, 0)
 
 logit = lme4::glmer(total_sp_tw_kde.Quintiles_binary ~ 
