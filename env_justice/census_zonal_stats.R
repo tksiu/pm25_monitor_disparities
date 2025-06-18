@@ -1,6 +1,11 @@
 require(exactextractr)
 
 
+"""  objects inherited from previous scripts """
+# source("/kde/adaptive_kde.R")
+# source("/env_justice/census_CIMD.R")
+
+
 
 """
 Download URLs of Canada Census 2021 boundary files are from here:
