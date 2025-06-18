@@ -6,8 +6,11 @@ require(lubridate)
 
 
 """ objects inherited from data access scripts """
+""" directly call /kde/bandwidths.R to ensure a smooth workflow (avoid conflicts in object/variable dependency between scripts """
 # source("./access/fem_access.R")
 # source("./access/purpleair_access.R")
+
+# source("./kde/bandwidths.R")
 
 
 """
