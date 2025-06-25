@@ -2,11 +2,12 @@ import pyrsig
 import numpy as np
 import pandas as pd
 
-
+# pollutant attribute name
 features_set = [
     'airnow.pm25'
 ]
 
+# date ranges (stratified by seasons)
 download_dates = [
     pd.date_range(start="2023-07-01", end="2023-09-30").to_pydatetime(),
     pd.date_range(start="2023-10-01", end="2023-12-31").to_pydatetime(),
@@ -15,9 +16,11 @@ download_dates = [
     pd.date_range(start="2024-07-01", end="2024-09-30").to_pydatetime(),
 ]
 
+# area of interest
 bbox = (-95.0, 41.5, -52.0, 63.0)
 
 
+# downloading process
 airNow_payload = []
 
 for dates in download_dates:
