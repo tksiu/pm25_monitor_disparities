@@ -55,7 +55,6 @@ if (sys.nframe() == 0) {
     da$pm25_3yr_mean = pm25_zonal
 
 
-
     ###  Merge/Fusion of Datasets ###
 
     da = merge(da, can_cimd, by="DAUID", all.x=T)
@@ -79,6 +78,8 @@ if (sys.nframe() == 0) {
     da$pm25_3yr_mean.group_Quintiles = sapply(da$pm25_3yr_mean.group_ecdf, quintiles)
 
 
+    ###  Largest quintile among the four CIMD dimensions  ###
+
     da$can_Deprivation.Quintiles = apply(cbind(da$can_Residential.instability.Quintiles, 
                                             da$can_Economic.dependency.Quintiles, 
                                             da$can_Situational.vulnerability.Quintiles, 
@@ -93,6 +94,8 @@ if (sys.nframe() == 0) {
     da$prov_Deprivation.Quintiles[da$prov_Deprivation.Quintiles == -Inf] = NA
 
 
+    ###  Any of the four CIMD dimensions falling in the top quintile  ###
+   
     da$can_Deprivation_top_quin_count = apply(cbind(da$can_Residential.instability.Quintiles, 
                                                     da$can_Economic.dependency.Quintiles, 
                                                     da$can_Situational.vulnerability.Quintiles, 
