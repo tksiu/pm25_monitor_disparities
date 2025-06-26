@@ -66,7 +66,7 @@ bandwidth_selection = function(coord) {
             adj_d = 0.005
         }
     
-        #  extract the searching window of the grid
+        #  extract the searching window of the current grid
         extract_pm25 = ncvar_get(nc_data, "PM25")[
             which( nc_data$dim$longitude$vals >= pt_lon - ndist + adj_a & nc_data$dim$longitude$vals <= pt_lon + ndist + adj_b ), 
             which( nc_data$dim$latitude$vals >= pt_lat - ndist + adj_c & nc_data$dim$latitude$vals <= pt_lat + ndist + adj_d )
@@ -79,6 +79,7 @@ bandwidth_selection = function(coord) {
         gradient_pm25 = abs((extract_pm25 - extract_pm25[centroid_idx, centroid_idx]) / extract_pm25[centroid_idx, centroid_idx] * 100)
         mask_gradient_pm25 = which( gradient_pm25 > pm25_percent_diff, arr.ind = T)
         mask_gradient_pm25 = as.data.frame(mask_gradient_pm25)
+        #  Euclidean distance between surrounding grids in the searching window and the current grid
         mask_gradient_pm25$euclidean_dist = mapply(function(a,b) {sqrt((a - centroid_idx)^2 + (b - centroid_idx)^2)}, 
                                                     mask_gradient_pm25$row, mask_gradient_pm25$col)
             
