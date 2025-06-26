@@ -54,10 +54,12 @@ for (i in 1:length(pa$site_id)) {
   recent_first = NA
   
   if (recent_name %in% folder_files) {
+    
     #  count number of hours with valid measurements in recent records
     recent_file = read.csv(paste0(folder_path, recent_name))
     recency = dim(subset(recent_file, !is.na(pm25_cal)))[1]
     recent_first = min(recent_file$date)
+    
   }
   
   if (history_name %in% folder_files) {
@@ -74,6 +76,7 @@ for (i in 1:length(pa$site_id)) {
     history_file$date = strftime(strptime(history_file$date, format="%Y-%m-%dT%H:%M:%SZ"), format="%Y-%m-%d %H:00:00")
     history_file = history_file %>% group_by(date) %>% summarise(pm2.5_validated_corrected = mean(`pm2.5_validated_corrected`, na.rm=T))
     history = dim(subset(history_file, !is.na(`pm2.5_validated_corrected`)))[1]
+    
   }
 
   #  obtain the fractions
