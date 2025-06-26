@@ -13,6 +13,7 @@ get_metadata = function() {
   metadata = data.table::fread(paste0(url, data_file), data.table = FALSE)
   return(metadata)
 }
+
 ###   a function to retrieve the metadata of all FEM monitors
 get_airnow_metadata = function() {
   url = "https://aqmap.ca/aqmap/data/agency/"
@@ -20,6 +21,7 @@ get_airnow_metadata = function() {
   metadata = data.table::fread(paste0(url, data_file), data.table = FALSE)
   return(metadata)
 }
+
 
 ###   a function to retrieve the recent data of specific FEM indices
 get_FEM_recent_data <- function(sensor_id, start_Date, end_Date, save_mode = FALSE, save_path = "./") {
@@ -53,6 +55,7 @@ get_FEM_recent_data <- function(sensor_id, start_Date, end_Date, save_mode = FAL
     }
   )
 }
+
 
 ###   a function to retrieve the older archived data of specific FEM indices
 get_FEM_older_data <- function(sensor_id, start_Date, end_Date, save_mode = FALSE, save_path = "./") {
@@ -92,6 +95,7 @@ get_FEM_older_data <- function(sensor_id, start_Date, end_Date, save_mode = FALS
   )
 }
 
+
 ###   a function to retrieve the recent data of specific PA sensor indices
 get_PA_sensor_recent_data <- function(sensor_id, start_Date, end_Date, save_mode = FALSE, save_path = "./") {
   ### Link to download
@@ -126,6 +130,7 @@ get_PA_sensor_recent_data <- function(sensor_id, start_Date, end_Date, save_mode
   
   Sys.sleep(1)
 }
+
 
 ###   a function to retrieve the older archived data of specific PurpleAir sensor indices
 get_PA_sensor_older_data <- function(sensor_id, start_Date, end_Date, save_mode = FALSE, save_path = "./") {
@@ -169,8 +174,10 @@ get_PA_sensor_older_data <- function(sensor_id, start_Date, end_Date, save_mode 
 if (sys.nframe() == 0) {
     
     ###  Define parameters
+    
     date_start = "2018-01-01"
     date_end = "2024-09-30"
+    
     ca_province = c(
         "Nova Scotia", 
         "New Brunswick", 
@@ -179,6 +186,7 @@ if (sys.nframe() == 0) {
         "Ontario", 
         "Quebec"
         )
+  
     save_folder = "./"
 
     ###  Downloading PurpleAir meta-data  ###
@@ -188,10 +196,14 @@ if (sys.nframe() == 0) {
 
     ###  Downloading PurpleAir sensor data  ###
 
-    pa_data = mapply(get_PA_sensor_recent_data, sensor_id = pa$site_id, start_Date="2023-01-01", end_Date=date_end, 
-                    save_mode = TRUE, save_path = save_folder)
-    pa_data_old = mapply(get_PA_sensor_older_data, sensor_id = pa$site_id, start_Date="2016-01-01", end_Date=date_end, 
-                        save_mode = TRUE, save_path = save_folder)
+    pa_data = mapply(get_PA_sensor_recent_data, 
+                     sensor_id = pa$site_id, 
+                     start_Date="2023-01-01", end_Date=date_end, 
+                     save_mode = TRUE, save_path = save_folder)
+    pa_data_old = mapply(get_PA_sensor_older_data, 
+                         sensor_id = pa$site_id, 
+                         start_Date="2016-01-01", end_Date=date_end, 
+                         save_mode = TRUE, save_path = save_folder)
 
 } else {
 
