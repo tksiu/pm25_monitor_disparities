@@ -75,11 +75,26 @@ bandwidth_selection = function(coord) {
         #  get the central point (current grid)
         centroid_idx = (dim(extract_pm25)[1] + 1) / 2
     
-        #  consider only surrounding grids within the searching window with PM2.5 conc. difference exceeding 10% from current grid
-        gradient_pm25 = abs((extract_pm25 - extract_pm25[centroid_idx, centroid_idx]) / extract_pm25[centroid_idx, centroid_idx] * 100)
-        mask_gradient_pm25 = which( gradient_pm25 > pm25_percent_diff, arr.ind = T)
-        mask_gradient_pm25 = as.data.frame(mask_gradient_pm25)
+        #  calculate PM2.5 gradients for surrounding grids within the searching window
+        abs_gradient_pm25 = abs((extract_pm25 - extract_pm25[centroid_idx, centroid_idx]) / extract_pm25[centroid_idx, centroid_idx] * 100)
+        gradient_pm25 = (extract_pm25 - extract_pm25[centroid_idx, centroid_idx]) / extract_pm25[centroid_idx, centroid_idx] * 100
+        
+        #  determine the buffering range to new exceedance level in 2030
+        buffer_exceed_pm25 = (8.0 - extract_pm25[centroid_idx, centroid_idx]) / extract_pm25[centroid_idx, centroid_idx] * 100
+        
+        #  determine the final bandwidth with criteria from PM2.5 gradients and exceedance-buffering range 
+        if (extract_pm25[centroid_idx, centroid_idx] < 7.2) {
+            mask_gradient_pm25 = which( abs_gradient_pm25 > percentage_diff_1, arr.ind = T)
+        } else if (extract_pm25[centroid_idx, centroid_idx] > 8.8) {
+            mask_gradient_pm25 = which( abs_gradient_pm25 > percentage_diff_2, arr.ind = T)
+        } else if (extract_pm25[centroid_idx, centroid_idx] <= 8) {
+            mask_gradient_pm25 = which( gradient_pm25 > buffer_exceed_pm25 | abs_gradient_pm25 > percentage_diff_1, arr.ind = T)
+        } else  {
+            mask_gradient_pm25 = which( gradient_pm25 < buffer_exceed_pm25 | abs_gradient_pm25 > percentage_diff_1, arr.ind = T)
+        }
+
         #  Euclidean distance between surrounding grids in the searching window and the current grid
+        mask_gradient_pm25 = as.data.frame(mask_gradient_pm25)
         mask_gradient_pm25$euclidean_dist = mapply(function(a,b) {sqrt((a - centroid_idx)^2 + (b - centroid_idx)^2)}, 
                                                     mask_gradient_pm25$row, mask_gradient_pm25$col)
             

@@ -53,4 +53,3 @@ for dates in download_dates:
         print("completed run for " + datetime.strftime(date, "%Y-%m-%d"))
 
     time.sleep(20)
-

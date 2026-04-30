@@ -1,14 +1,15 @@
-source("purpleair_access.R")
-source("fem_access.R")
+source("./access/purpleair_access.R")
+source("./access/fem_access.R")
 
-source("rasterize_surfacePM25.R")
-source("getPoints.R")
+source("./preprocess/rasterize_surfacePM25.R")
+source("./preprocess/getPoints.R")
 
-source("weights.R")
-source("bandwidths.R")
-source("adaptive_kde.R")
+source("./kde/weights.R")
+source("./kde/bandwidths.R")
+source("./kde/adaptive_kde.R")
 
-source("census_CIMD.R")
-source("census_zonal_stats.R")
+source("./multilevel/census_CIMD.R")
+source("./multilevel/census_PwD.R")
+source("./multilevel/census_zonal_stats.R")
 
-source("mixed_effects.R")
+source("./multilevel/spMM.R")

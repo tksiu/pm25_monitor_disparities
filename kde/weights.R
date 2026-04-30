@@ -19,8 +19,8 @@ Time weights for the Adaptive KDE
 
 ##  Total number of days in 2018-2024
 
-date_start = "2018-01-01"
-date_end = "2024-09-30"
+date_start = "2020-01-01"
+date_end = "2024-12-31"
 
 period_diff <- as.integer(as.Date(date_end) - as.Date(date_start))
 

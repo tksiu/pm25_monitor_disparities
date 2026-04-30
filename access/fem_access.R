@@ -10,32 +10,38 @@ require(lubridate)
 
 # 1) AirNow - summarized total counts of observations from hourly PM2.5 data
 
-fem = read.xlsx("./data/fem_monitor_counts_2018-2024.xlsx")
+fem = read.xlsx("./data/fem_monitor_counts_2020-2024.xlsx")
 fem$SITE_NAME = sapply(fem$SITE_NAME, function(x) trimws(str_split(x, ">")[[1]][2]))
 fem$siteID = sapply(fem$SITE_NAME, function(x) substr(str_split(x, ";")[[1]][1], 4, nchar(str_split(x, ";")[[1]][1])))
 fem$siteID = sapply(fem$siteID, function(x) ifelse(grepl('[A-Z]', substr(x, 1, 4)), paste0("000", substr(x, 4, nchar(x))), x))
 colnames(fem)[1:2] = c("Lon","Lat")
 
-fem_recent = read.xlsx("./data/fem_monitor_counts_2023-2024.xlsx")
+###  Using AirNow records for the year 2024 when NAPS data is not ready
+
+fem_recent = read.xlsx("./data/fem_monitor_counts_2024.xlsx")
 fem_recent$SITE_NAME = sapply(fem_recent$SITE_NAME, function(x) trimws(str_split(x, ">")[[1]][2]))
 fem_recent$siteID = sapply(fem_recent$SITE_NAME, function(x) substr(str_split(x, ";")[[1]][1], 4, nchar(str_split(x, ";")[[1]][1])))
 fem_recent$siteID = sapply(fem_recent$siteID, function(x) ifelse(grepl('[A-Z]', substr(x, 1, 4)), paste0("000", substr(x, 4, nchar(x))), x))
 colnames(fem_recent)[1:2] = c("Lon","Lat")
 colnames(fem_recent)[4] = "count_recent"
 
-##  calculate total counts of observations per station (site)  -->  active time proportion from 2018 to 2024
 fem_recent = fem_recent %>% group_by(siteID) %>% summarise(count_recent = sum(count_recent))
 
 
 # 2) Canadian NAPS - https://data-donnees.az.ec.gc.ca/data/air/monitor/national-air-pollution-surveillance-naps-program/
                     
-naps = read.xlsx("./data/2018-2022_hourly_PM2.5.xlsx")
+naps = read.xlsx("./data/2020-2023_hourly_PM2.5.xlsx")
 ## mask missing values
 naps[,9:32][naps[,9:32] == -999] = NA
 ## invalid negative values
 naps[,9:32][naps[,9:32] < 0] = NA
 ## calculate total counts of observations  -->  active time proportion; and first date of operation within the study period
 naps$sum_hours = apply(naps[,9:32], 1, function(x) sum(!is.na(x)))
+
+## exclude duplicated methods
+naps = subset(naps, !(`NAPS.ID` == 50131 & `Method.Code//Code.Méthode` == 195 & Date >= "2023-01-01"))
+
+## aggregate operating statistics
 naps = naps %>% group_by(NAPS.ID, City, Province, Latitude, Longitude) %>% summarise(minDate = min(Date), naps_sum_hours = sum(sum_hours))
 
 naps$Date = as.Date(naps$Date, origin="1899-12-30")
@@ -66,4 +72,3 @@ fem_coord = fem_coord %>% group_by(siteID) %>% summarise(Lon = first(Lon), Lat =
 
 fem_coord = merge(fem_coord, naps[,c("siteID","minDate","naps_sum_hours")], by="siteID", all.x=T)
 fem_coord = merge(fem_coord, fem_recent[,c("siteID","count_recent")], by="siteID", all.x=T)
-

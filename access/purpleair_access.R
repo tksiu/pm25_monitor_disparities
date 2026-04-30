@@ -175,8 +175,8 @@ if (sys.nframe() == 0) {
     
     ###  Define parameters
     
-    date_start = "2018-01-01"
-    date_end = "2024-09-30"
+    date_start = "2020-01-01"
+    date_end = "2024-12-31"
     
     ca_province = c(
         "Nova Scotia", 
