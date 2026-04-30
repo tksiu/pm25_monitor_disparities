@@ -1,7 +1,7 @@
 ###  An adaptive kernel density estimator for PM<sub>2.5</sub> monitor density in eastern Canada with high-resolution model-derived surface concentrations for bandwidth selection
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-This repository presents the codes for implementing the analysis in the submitted manuscript "Disparities in fine particulate matter (PM<sub>2.5</sub>) monitoring in Eastern Canada".
+This repository presents the codes for implementing the analysis in the submitted manuscript "Disparities in fine particulate matter (PM<sub>2.5</sub>) monitoring capacity in Eastern Canada".
 
 This includes:
 
@@ -13,7 +13,7 @@ This includes:
 
 As deliverables, the findings can be used for: 
   1) identifying the PM<sub>2.5</sub> monitoring gap;
-  2) linking the lack of PM<sub>2.5</sub> monitoring resources with social deprivations in environmental justice
+  2) linking the bottom-quintile communities lacking PM<sub>2.5</sub> monitoring resources with social deprivations and health vulnerability
 
 Refer to below the package versions:
 >>
@@ -31,20 +31,22 @@ Refer to below the package versions:
 [1] ‘1.9.4’ <br>
 > packageVersion("ggplot2") <br>
 [1] ‘3.5.1’ <br>
-> packageVersion("sp") <br>
-[1] ‘2.1.4’ <br>
-> packageVersion("sf") <br>
-[1] ‘1.0.19’ <br>
-> packageVersion("tmap") <br>
-[1] ‘3.3.4’ <br>
 > packageVersion("ncdf4") <br>
 [1] ‘1.23’ <br>
 > packageVersion("raster") <br>
 [1] ‘3.6.30’ <br>
+> packageVersion("sp") <br>
+[1] ‘2.1.4’ <br>
+> packageVersion("sf") <br>
+[1] ‘1.0.19’ <br>
 > packageVersion("spatstat") <br>
 [1] ‘3.3.0’ <br>
+> packageVersion("spdep") <br>
+[1] ‘1.4.1’ <br>
 > packageVersion("basemaps") <br>
 [1] ‘0.0.8’ <br>
+> packageVersion("tmap") <br>
+[1] ‘3.3.4’ <br>
 > packageVersion("terra") <br>
 [1] ‘1.7.83’ <br>
 > packageVersion("tidyterra") <br>
@@ -53,3 +55,5 @@ Refer to below the package versions:
 [1] ‘0.10.0’ <br>
 > packageVersion("lme4") <br>
 [1] ‘1.1.35.5’ <br>
+> packageVersion("parameters") <br>
+[1] ‘0.24.1’ <br>
