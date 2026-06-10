@@ -69,7 +69,7 @@ for (i in 1:length(pa$site_id)) {
 
     #  filter dates (excluded recent period to avoid duplicated counting
     if (!is.na(recent_first)) {
-        history_file = subset(history_file, date < recent_first & date >= "2018-01-01")
+        history_file = subset(history_file, date < recent_first & date >= date_start)
     }
 
     #  count number of hours with valid measurements in history records
