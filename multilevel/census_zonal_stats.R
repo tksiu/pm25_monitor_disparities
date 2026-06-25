@@ -14,9 +14,9 @@ https://www12.statcan.gc.ca/census-recensement/2021/geo/sip-pis/boundary-limites
 """
 
 
-###  Calling provincial boundary  ###
+###  Calling Provincial boundary  ###
 
-prov = read_sf(dsn = "./lpr_000b21a_e.shp", layer = "lpr_000b21a_e")
+prov = read_sf(dsn = "lpr_000b21a_e.shp", layer = "lpr_000b21a_e")
 prov = subset(prov, PRUID %in% c("10","11","12","13","35","24"))
 prov = st_transform(prov, 4326)
 prov = st_make_valid(prov)
@@ -24,23 +24,23 @@ prov = st_make_valid(prov)
 
 ###  Calling DA boundary  ###
 
-da = read_sf(dsn = "./lda_000b21a_e.shp", layer = "lda_000b21a_e")
+da = read_sf(dsn = "lda_000b21a_e.shp", layer = "lda_000b21a_e")
 da = subset(da, PRUID %in% c("10","11","12","13","35","24"))
 da = st_transform(da, crs = 4326)
 
 
 ###  Calling CT boundary  ###
-ct = read_sf(dsn = "./lct_000b21a_e.shp", layer = "lct_000b21a_e")
+ct = read_sf(dsn = "lct_000b21a_e.shp", layer = "lct_000b21a_e")
 ct = subset(ct, PRUID %in% c("10","11","12","13","35","24"))
 ct = st_transform(ct, crs = 4326)
 
 
 ###  Calling CMA boundary  ###
-cma = read_sf(dsn = "./lcma000b21a_e.shp", layer = "lcma000b21a_e")
+cma = read_sf(dsn = "lcma000b21a_e.shp", layer = "lcma000b21a_e")
 cma = subset(cma, PRUID %in% c("10","11","12","13","35","24"))
 cma = st_transform(cma, crs = 4326)
 
-map_ct_cma = read.xlsx("./2021_98260004_DGUID_relationship.xlsx")
+map_ct_cma = read.xlsx("2021_98260004_DGUID_relationship.xlsx")
 map_ct_cma = unique(map_ct_cma[,c("CMADGUID_RMRIDUGD","CTDGUID_SRIDUGD")])
 map_ct_cma = subset(map_ct_cma, !is.na(CMADGUID_RMRIDUGD) & !is.na(CTDGUID_SRIDUGD))
 
