@@ -3,7 +3,8 @@ require(spdep)
 
 
 """  objects inherited from previous scripts """
-# source("/multilevel/census_zonal_stats.R")
+
+# source("../multilevel/census_zonal_stats.R")
 
 
 #  outcome variable at DA level
@@ -16,8 +17,20 @@ ct$adj_total_sp_tw_kde.Quintiles_binary = ifelse(ct$adj_total_sp_tw_kde.Quintile
 #  weighted by Queen Contiguity
 
 geom_da = st_make_valid(subset(da, rownames(da) %in% rownames(cimd_logit_4@frame))$geometry)
+
+##  1) Queen contiguity
 queen_da = poly2nb(geom_da, queen = TRUE)
 queen_da_w = nb2listw(queen_da, style = "W", zero.policy = TRUE)
+
+##  2) Buffer distance (5 km)
+distnb_da = dnearneigh(st_coordinates(st_centroid(geom_da)), d1 = 0, d2 = 0.05)
+distnb_da_w = nb2listwdist(distnb_da, as(st_centroid(geom_da), "Spatial"), type = "idw", style = "B", zero.policy = TRUE)
+
+##  3) k-NN neighbours (k = 5)
+knn_da = knearneigh(st_coordinates(st_centroid(geom_da)), k = 5)
+knn_da = knn2nb(knn_da)
+knn_da_w = nb2listw(knn_da, style = "W", zero.policy = TRUE)
+
 
 names(da) <- gsub("-", "", names(da))
 
@@ -28,6 +41,9 @@ da$x_coord = sapply(da$centroid, function(x) st_coordinates(x)[, "X"])
 da$y_coord = sapply(da$centroid, function(x) st_coordinates(x)[, "Y"])
 da$pos = numFactor(scale(da$x_coord), scale(da$y_coord))
 da$pos_group = factor(rep(1, nrow(da)))
+
+
+##  generate spatially lagged variables with Queen contiguity weighting matrix
 
 da_processed = da %>% ungroup()
 for (f in c("adj_total_sp_tw_kde.Quintiles_binary",

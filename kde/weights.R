@@ -5,19 +5,19 @@ require(data.table)
 require(lubridate)
 
 
-""" objects inherited from data access scripts """
-""" directly call /kde/bandwidths.R to ensure a smooth workflow (avoid conflicts in object/variable dependency between scripts """
-# source("./access/fem_access.R")
-# source("./access/purpleair_access.R")
+""" objects inherited from the scripts in ../data/access/ folder """
+""" directly call ../kde/bandwidths.R to ensure a smooth workflow (avoid conflicts in object dependency between scripts) """
 
-# source("./kde/bandwidths.R")
+# source("../access/fem_access.R")
+# source("../access/purpleair_access.R")
+# source("../kde/bandwidths.R")
 
 
 """
 Time weights for the Adaptive KDE
 """
 
-##  Total number of days in 2018-2024
+##  Total number of days in 2020-2024
 
 date_start = "2020-01-01"
 date_end = "2024-12-31"

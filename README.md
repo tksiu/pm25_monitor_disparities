@@ -17,16 +17,16 @@ As deliverables, the findings can be used for:
 
 Refer to below the package versions:
 >>
-> packageVersion("dplyr") <br>
-[1] ‘1.1.4’ <br>
-> packageVersion("stringr") <br>
-[1] ‘1.5.1’ <br>
-> packageVersion("reshape2") <br>
-[1] ‘1.4.4’ <br>
 > packageVersion("openxlsx") <br>
 [1] ‘4.2.7.1’ <br>
-> packageVersion("data.table") <br>
-[1] ‘1.16.4’ <br>
+> packageVersion("dplyr") <br>
+[1] ‘1.1.4’ <br>
+> packageVersion("tidyr") <br>
+[1] ‘1.3.1’ <br>
+> packageVersion("reshape2") <br>
+[1] ‘1.4.4’ <br>
+> packageVersion("stringr") <br>
+[1] ‘1.5.1’ <br>
 > packageVersion("lubridate") <br>
 [1] ‘1.9.4’ <br>
 > packageVersion("ggplot2") <br>
@@ -43,10 +43,6 @@ Refer to below the package versions:
 [1] ‘3.3.0’ <br>
 > packageVersion("spdep") <br>
 [1] ‘1.4.1’ <br>
-> packageVersion("basemaps") <br>
-[1] ‘0.0.8’ <br>
-> packageVersion("tmap") <br>
-[1] ‘3.3.4’ <br>
 > packageVersion("terra") <br>
 [1] ‘1.7.83’ <br>
 > packageVersion("tidyterra") <br>
@@ -57,3 +53,9 @@ Refer to below the package versions:
 [1] ‘1.1.35.5’ <br>
 > packageVersion("parameters") <br>
 [1] ‘0.24.1’ <br>
+> packageVersion("marginaleffects") <br>
+[1] ‘0.32.0’ <br>
+> packageVersion("ggeffects") <br>
+[1] ‘0.32.0’ <br>
+> packageVersion("scales") <br>
+[1] ‘1.4.0’ <br>

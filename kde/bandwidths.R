@@ -5,8 +5,9 @@ require(spatstat)
 
 
 """ objects inherited from preprocess scripts """
-# source("./preprocess/getPoints.R")
-# source("./preprocess/rasterize_surfacePM25.R")
+
+# source("../preprocess/getPoints.R")
+# source("../preprocess/rasterize_surfacePM25.R")
 
 
 
@@ -21,12 +22,13 @@ maxdist = as.numeric(
 )
 #   in km (rounding up to integer)
 ndist = ceiling(maxdist)
-#   in numer of grids
+#   in number of grids
 ndist = ndist * 0.01
 
 
 #   set the cut-off value of the percentage variation in PM2.5 concentration
-pm25_percent_diff = 10
+percentage_diff_1 = 10
+percentage_diff_2 = 5
 
 
 ###  Calculating local bandwidths for FEM monitors  ###

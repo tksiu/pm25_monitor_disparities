@@ -5,7 +5,7 @@ require(spatstat)
 
 
 """ precomputed weightings and bandwidths (incorporated in /kde/weights to avoid conflicts in workflow) """
-# source("./kde/weights.R")
+# source("../kde/weights.R")
 
 
 ####  Create an output grid object  ####
@@ -24,7 +24,7 @@ colnames(interp_grid) = c("x","y")
 
 if (sys.nframe() == 0) {
 
-    #  PurpleAir sensors: computed/supervised bandwidth selection, weighted by operating time (% being active)
+    ###  PurpleAir sensors: computed/supervised bandwidth selection, weighted by operating time (% being active)
 
     pa_sp_den_tw = densityAdaptiveKernel(
         X = pa_points, 
@@ -33,16 +33,27 @@ if (sys.nframe() == 0) {
         weights = pa$accessible_time + 1e-5
     )
 
-    #  PurpleAir sensors: automatic bandwidth selection, weighted by operating time (% being active)
+    ###  PurpleAir sensors: automatic bandwidth selection (i.e., likelihood cross-validation), weighted by operating time (% being active)
 
     pa_sp_den_tw_auto = densityAdaptiveKernel(
         X = pa_points, 
+    #   bw = bw.abram(pa_points, h0 = bw.ppl(pa_points)),
         dimyx=c(length(interp_y), 
         length(interp_x)), 
         weights = pa$accessible_time + 1e-5
     )
 
-    #  FEM monitors: computed/supervised bandwidth selection, weighted by operating time (% being active)
+    ###  PurpleAir sensors: MSE bandwidth selection, weighted by operating time (% being active)
+
+    pa_sp_den_tw_mse = densityAdaptiveKernel(
+        X = pa_points, 
+        bw = bw.abram(pa_points, h0 = bw.diggle(pa_points)),
+        dimyx=c(length(interp_y), 
+        length(interp_x)), 
+        weights = pa$accessible_time + 1e-5
+    )
+
+    ###  FEM monitors: computed/supervised bandwidth selection, weighted by operating time (% being active)
 
     fem_sp_den_tw = densityAdaptiveKernel(
         X = fem_points, 
@@ -51,17 +62,27 @@ if (sys.nframe() == 0) {
         weights = fem_coord$accessible_time + 0.0001
     )
 
-    #  FEM monitors: automatic bandwidth selection, weighted by operating time (% being active)
+    ###  FEM monitors: automatic bandwidth selection (i.e., likelihood cross-validation), weighted by operating time (% being active)
 
     fem_sp_den_tw_auto = densityAdaptiveKernel(
         X = fem_points, 
+    #   bw = bw.abram(fem_points, h0 = bw.ppl(pa_points)),
         dimyx=c(length(interp_y), length(interp_x)), 
         weights = fem_coord$accessible_time + 0.0001
     )
 
-    #  National Pollutant Release Inventory (NPRI) PM2.5 emission facility: bandwidth selection by MSE cross-validation, weighted by emission inventory
+    ###  FEM monitors: MSE bandwidth selection, weighted by operating time (% being active)
 
-    npri = read_sf("./data/pm25_npri_2021-2023.shp")
+    fem_sp_den_tw_auto = densityAdaptiveKernel(
+        X = fem_points, 
+        bw = bw.abram(fem_points, h0 = bw.diggle(fem_points)),
+        dimyx=c(length(interp_y), length(interp_x)), 
+        weights = fem_coord$accessible_time + 0.0001
+    )
+
+    ###  National Pollutant Release Inventory (NPRI) PM2.5 emission facility: bandwidth selection by MSE cross-validation, weighted by emission inventory
+
+    npri = read_sf("../data/pm25_npri_2021-2023.shp")
     colnames(npri) = c(
         "NPRI ID","Facility name","Company name","Province","City","PostalCode","Longitude","Latitude",
         "Emissions_2020","Emission_2021","Emission_2022","Emission_2023","Emission_3yr_mean","geometry"
@@ -81,3 +102,4 @@ if (sys.nframe() == 0) {
 } else {
 
 }
+

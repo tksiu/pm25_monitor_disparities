@@ -19,7 +19,7 @@ maxy = 63.0
 
 '''Method 1'''
 
-nc_data <- nc_open('./data/V6GL02.04.CNNPM25.NA.3year_mean_2021-2023.nc')
+nc_data <- nc_open('../data/V6GL02.04.CNNPM25.NA.3year_mean_2021-2023.nc')
 names(nc_data$var) = c("PM25", "crs")
 nc_data$var$PM25$name = "PM25"
 
@@ -32,9 +32,9 @@ ex_pm25 <- ncvar_get(nc_data, "PM25")[LonIdx, LatIdx]
 
 '''Method 2'''
 
-pm25 = rast('./data/V6GL02.04.CNNPM25.NA.3year_mean_2021-2023.nc')
+pm25 = rast('../data/V6GL02.04.CNNPM25.NA.3year_mean_2021-2023.nc')
 extent <- c(minx, maxx, miny, maxy) |> ext()
 pm25_crop <- crop(pm25, extent)
 
-terra::writeRaster(pm25_crop, filename="./data/NA_3year_mean_2021-2023.tif", overwrite=TRUE)
+terra::writeRaster(pm25_crop, filename="../data/NA_3year_mean_2021-2023.tif", overwrite=TRUE)
 
